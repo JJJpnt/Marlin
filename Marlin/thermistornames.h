@@ -59,6 +59,15 @@
   #define THERMISTOR_NAME "E3104FXT (alt)"
 #elif THERMISTOR_ID == 13
   #define THERMISTOR_NAME "Hisens 3950"
+
+//JJJ Dago's own thermistors definitions 16 and 17
+// 16 is 100K thermistor - Alternative ATC Semitec 104GT-2 (4.7k pullup) Dagoma.Fr version (measured/tested/approved)
+#elif THERMISTOR_ID == 16
+  #define THERMISTOR_NAME "104GT-2 Dag"
+// 17 is 100K thermistor - Alternative ATC Semitec 104GT-2 (4.7k pullup) Dagoma.Fr - MKS_Base - version (measured/tested/approved)
+#elif THERMISTOR_ID == 17
+  #define THERMISTOR_NAME "104GT-2 MKS"
+
 #elif THERMISTOR_ID == 20
   #define THERMISTOR_NAME "PT100 UltiMB"
 #elif THERMISTOR_ID == 60
