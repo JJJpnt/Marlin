@@ -126,8 +126,8 @@
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB	//JJJ RiP MKS_BASE :'(
-//  #define MOTHERBOARD BOARD_MKS_BASE	//JJJ MOTHERBOARD BOARD_MKS_BASE
+//  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_MKS_BASE	//JJJ MOTHERBOARD BOARD_MKS_BASE
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
@@ -300,7 +300,7 @@
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
-#define TEMP_SENSOR_BED 13
+#define TEMP_SENSOR_BED 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
 #define DUMMY_THERMISTOR_998_VALUE 25
@@ -567,9 +567,7 @@
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 //JJJ note : E Calib 20171105 = 99.04 but using dago's value 98 for firmware
-												//JJJ Trapezos (Z -> 400)
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 99.04 }	//JJJ DEFAULT_AXIS_STEPS_PER_UNIT
-																
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 2560, 98 }	//JJJ DEFAULT_AXIS_STEPS_PER_UNIT
 
 
 /**
@@ -937,10 +935,10 @@
  *   leveling in steps so you can manually adjust the Z height at each grid-point.
  *   With an LCD controller the process is guided step-by-step.
  */
-//#define AUTO_BED_LEVELING_3POINT	//JJJ AUTO_BED_LEVELING_3POINT for now...
+#define AUTO_BED_LEVELING_3POINT	//JJJ AUTO_BED_LEVELING_3POINT for now...
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_BILINEAR
-#define AUTO_BED_LEVELING_UBL	//JJJ UBL, Here we go again...
+//#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
 /**
