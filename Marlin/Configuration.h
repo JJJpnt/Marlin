@@ -1656,6 +1656,17 @@
 // Support for BlinkM/CyzRgb
 //#define BLINKM
 
+//JJJ Support for J-J.J.'s own RGBW leds controler
+#define JJJRGBW
+#if ENABLED(JJJRGBW)
+	#define JJJRGBW_SCL_PIN	11		//JJJRGBW i2c clock pin
+	#define JJJRGBW_SDA_PIN	12		//JJJRGBW i2c data pin
+	#define JJJRGBW_DEBUG
+	#define INVERT_CASE_LIGHT false             // Set true if Case Light is ON when pin is LOW
+	#define CASE_LIGHT_DEFAULT_ON true          // Set default power-up state on
+	#define CASE_LIGHT_DEFAULT_BRIGHTNESS 160   // Set default power-up brightness (0-255, requires PWM pin)
+#endif
+
 // Support for PCA9632 PWM LED driver
 //#define PCA9632
 
@@ -1713,7 +1724,8 @@
  *  - Change to green once print has finished
  *  - Turn off after the print has finished and the user has pushed a button
  */
-#if ENABLED(BLINKM) || ENABLED(RGB_LED) || ENABLED(RGBW_LED) || ENABLED(PCA9632) || ENABLED(NEOPIXEL_LED)
+//#if ENABLED(BLINKM) || ENABLED(RGB_LED) || ENABLED(RGBW_LED) || ENABLED(PCA9632) || ENABLED(NEOPIXEL_LED)
+#if ENABLED(BLINKM) || ENABLED(RGB_LED) || ENABLED(RGBW_LED) || ENABLED(PCA9632) || ENABLED(NEOPIXEL_LED) || ENABLED(JJJRGBW)	//JJJ JJJRGBW PRINTER_EVENT_LEDS
   #define PRINTER_EVENT_LEDS
 #endif
 

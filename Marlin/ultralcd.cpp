@@ -785,11 +785,25 @@ void kill_screen(const char* lcd_msg) {
 
   #endif // SDSUPPORT
 
-  #if ENABLED(MENU_ITEM_CASE_LIGHT)
+//  #if ENABLED(MENU_ITEM_CASE_LIGHT)
+  #if ENABLED(MENU_ITEM_CASE_LIGHT) || ENABLED(JJJRGBW)
 
     extern uint8_t case_light_brightness;
     extern bool case_light_on;
     extern void update_case_light();
+	#if ENABLED(JJJRGBW)	//JJJ JJJRGBW
+		  //JJJ JJJRGBW values for lcd menu
+		  extern void update_rgb_light();
+		  extern uint8_t jjjrgbw_r_value;  //JJJ JJJRGBW r value
+		  extern uint8_t jjjrgbw_g_value;  //JJJ JJJRGBW g value
+		  extern uint8_t jjjrgbw_b_value;  //JJJ JJJRGBW b value
+		  void jjjrgbw_turn_off_rgb() {
+			  jjjrgbw_r_value = 0;
+			  jjjrgbw_g_value = 0;
+			  jjjrgbw_b_value = 0;
+			  update_rgb_light();
+		  }
+	#endif //ENABLED(JJJRGBW)
 
     void case_light_menu() {
       START_MENU();
@@ -799,6 +813,12 @@ void kill_screen(const char* lcd_msg) {
       MENU_BACK(MSG_MAIN);
       MENU_ITEM_EDIT_CALLBACK(int8, MSG_CASE_LIGHT_BRIGHTNESS, &case_light_brightness, 0, 255, update_case_light, true);
       MENU_ITEM_EDIT_CALLBACK(bool, MSG_CASE_LIGHT, (bool*)&case_light_on, update_case_light);
+	  #if ENABLED(JJJRGBW)	//JJJ JJJRGBW RGB Menus items
+	      MENU_ITEM_EDIT_CALLBACK(int8, "Red", &jjjrgbw_r_value, 0, 255, update_rgb_light, true);
+	      MENU_ITEM_EDIT_CALLBACK(int8, "Green", &jjjrgbw_g_value, 0, 255, update_rgb_light, true);
+	      MENU_ITEM_EDIT_CALLBACK(int8, "Blue", &jjjrgbw_b_value, 0, 255, update_rgb_light, true);
+	      MENU_ITEM(function, "Turn off RGB", jjjrgbw_turn_off_rgb);
+	  #endif //ENABLED(JJJRGBW)
       END_MENU();
     }
   #endif // MENU_ITEM_CASE_LIGHT

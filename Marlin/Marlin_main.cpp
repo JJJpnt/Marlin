@@ -292,6 +292,10 @@
   #include "Wire.h"
 #endif
 
+#if ENABLED(JJJRGBW)	//JJJ JJJRGBW main include
+  #include "jjjrgbw.h"
+#endif
+
 #if ENABLED(PCA9632)
   #include "pca9632.h"
 #endif
@@ -357,7 +361,8 @@
   #endif
 #endif
 
-#if ENABLED(RGB_LED) || ENABLED(BLINKM) || ENABLED(PCA9632)
+//#if ENABLED(RGB_LED) || ENABLED(BLINKM) || ENABLED(PCA9632)
+#if ENABLED(RGB_LED) || ENABLED(BLINKM) || ENABLED(PCA9632) || ENABLED(JJJRGBW)		//JJJ JJJRGBW LED_WHITE
   #define LED_WHITE 255, 255, 255
 #elif ENABLED(RGBW_LED)
   #define LED_WHITE 0, 0, 0, 255
@@ -1049,7 +1054,8 @@ void servo_init() {
 
     #endif
 
-    #if ENABLED(BLINKM)
+//    #if ENABLED(BLINKM)
+    #if ENABLED(BLINKM) || ENABLED(JJJRGBW)	//JJJ JJJRGBW set_led_color()
 
       // This variant uses i2c to send the RGB components to the device.
       SendColors(r, g, b);
@@ -7649,7 +7655,8 @@ inline void gcode_M109() {
   if (wait_for_heatup) {
     LCD_MESSAGEPGM(MSG_HEATING_COMPLETE);
     #if ENABLED(PRINTER_EVENT_LEDS)
-      #if ENABLED(RGB_LED) || ENABLED(BLINKM) || ENABLED(PCA9632) || ENABLED(RGBW_LED)
+//      #if ENABLED(RGB_LED) || ENABLED(BLINKM) || ENABLED(PCA9632) || ENABLED(RGBW_LED)
+      #if ENABLED(RGB_LED) || ENABLED(BLINKM) || ENABLED(PCA9632) || ENABLED(RGBW_LED) || ENABLED(JJJRGBW)	//JJJ JJJRGBW PRINTER_EVENT_LEDS heating complete
         set_led_color(LED_WHITE);
       #endif
       #if ENABLED(NEOPIXEL_LED)
@@ -8276,7 +8283,8 @@ inline void gcode_M115() {
     // CASE LIGHTS (M355)
     #if HAS_CASE_LIGHT
       SERIAL_PROTOCOLLNPGM("Cap:TOGGLE_LIGHTS:1");
-      if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN)) {
+//      if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN)) {
+      if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN) || ENABLED(JJJRGBW)) {		//JJJ JJJRGBW enables Cap:CASE_LIGHT_BRIGHTNESS:1
         SERIAL_PROTOCOLLNPGM("Cap:CASE_LIGHT_BRIGHTNESS:1");
       }
       else
@@ -10156,16 +10164,42 @@ inline void gcode_M907() {
   uint8_t case_light_brightness;  // LCD routine wants INT
   bool case_light_on;
 
-  void update_case_light() {
-    pinMode(CASE_LIGHT_PIN, OUTPUT); // digitalWrite doesn't set the port mode
-    if (case_light_on) {
-      if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN)) {
-        analogWrite(CASE_LIGHT_PIN, INVERT_CASE_LIGHT ? 255 - case_light_brightness : case_light_brightness);
-      }
-      else WRITE(CASE_LIGHT_PIN, INVERT_CASE_LIGHT ? LOW : HIGH);
-    }
-    else WRITE(CASE_LIGHT_PIN, INVERT_CASE_LIGHT ? HIGH : LOW);
-  }
+  #if ENABLED(JJJRGBW)	//JJJ JJJRGBW update_case_light()
+
+  	  //JJJ JJJRGBW values for lcd menu
+	  extern uint8_t jjjrgbw_r_value;  //JJJ JJJRGBW r value
+	  extern uint8_t jjjrgbw_g_value;  //JJJ JJJRGBW g value
+	  extern uint8_t jjjrgbw_b_value;  //JJJ JJJRGBW b value
+
+	  void update_case_light() {
+		if (case_light_on) {
+			SendColors(INVERT_CASE_LIGHT ? 255 - case_light_brightness : case_light_brightness);
+		}
+		else
+		{
+			SendColors(INVERT_CASE_LIGHT ? 255 : 0);
+		}
+	  }
+
+	  void update_rgb_light() {
+	    //pinMode(CASE_LIGHT_PIN, OUTPUT); // digitalWrite doesn't set the port mode
+	        SendColors(jjjrgbw_r_value,jjjrgbw_g_value,jjjrgbw_b_value);
+	  }
+
+  #else
+	  void update_case_light() {
+		pinMode(CASE_LIGHT_PIN, OUTPUT); // digitalWrite doesn't set the port mode
+		if (case_light_on) {
+		  if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN)) {
+			analogWrite(CASE_LIGHT_PIN, INVERT_CASE_LIGHT ? 255 - case_light_brightness : case_light_brightness);
+		  }
+		  else WRITE(CASE_LIGHT_PIN, INVERT_CASE_LIGHT ? LOW : HIGH);
+		}
+		else WRITE(CASE_LIGHT_PIN, INVERT_CASE_LIGHT ? HIGH : LOW);
+	  }
+
+  #endif // ENABLED(JJJRGBW)	//JJJ JJJRGBW end update_case_light() mod. block
+
 #endif // HAS_CASE_LIGHT
 
 /**
