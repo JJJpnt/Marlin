@@ -85,11 +85,10 @@
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-//#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
-#define STRING_CONFIG_H_AUTHOR "J-J.J." // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "J-J.J."	//JJJ STRING_CONFIG_H_AUTHOR	// Who made the changes.
 #define SHOW_BOOTSCREEN
 //#define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
-#define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION " mod. by JJJ" // will be shown during bootup in line 1
+#define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION "mod. by JJJ (thingy)" // will be shown during bootup in line 1
 //#define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
 #define STRING_SPLASH_LINE2 "171201 - Head by Z122"         // will be shown during bootup in line 2
 
@@ -104,7 +103,7 @@
 // boot image unmodified. For an example have a look at the bq Hephestos 2
 // example configuration folder.
 //
-#define SHOW_CUSTOM_BOOTSCREEN	//JJJ
+#define SHOW_CUSTOM_BOOTSCREEN	//JJJ SHOW_CUSTOM_BOOTSCREEN
 // @section machine
 
 /**
@@ -133,7 +132,8 @@
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_MKS_BASE
+//  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD BOARD_MKS_BASE	//JJJ MOTHERBOARD BOARD_MKS_BASE
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
@@ -316,7 +316,7 @@
 #define MAX_REDUNDANT_TEMP_SENSOR_DIFF 10
 
 // Extruder temperature must be close to target for this long before M109 returns success
-// JJJ Note : In Dago's DE200 config, they set those to 15, 4, 3
+//JJJ Note TEMP_RESIDENCY _HYSTERESIS _WINDOW : In Dagoma's DE200 config, they set those to 15, 4, 3
 #define TEMP_RESIDENCY_TIME 10  // (seconds)
 #define TEMP_HYSTERESIS 3       // (degC) range of +/- temperatures considered "close" to the target one
 #define TEMP_WINDOW     1       // (degC) Window around target to start the residency timer x degC early.
@@ -565,7 +565,9 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
 //#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
-#define DEFAULT_MAX_ACCELERATION      { 9000, 3000, 100, 10000 }	//Dago
+#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 10000 }	//JJJ Trying 2000 from 20171203_1931
+//#define DEFAULT_MAX_ACCELERATION      { 6000, 3000, 100, 10000 }	//JJJ DEFAULT_MAX_ACCELERATION previous values
+//#define DEFAULT_MAX_ACCELERATION      { 9000, 3000, 100, 10000 }	//JJJ DEFAULT_MAX_ACCELERATION Dago values
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -575,9 +577,13 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
+//#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
+//#define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
+//#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+//JJJ DEFAULT_ACCELERATIONs @ 20171203_1931
+#define DEFAULT_ACCELERATION          2000    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   2000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk (mm/s)
@@ -707,25 +713,24 @@
 //#define X_PROBE_OFFSET_FROM_EXTRUDER 10  // X offset: -left  +right  [of the nozzle]
 //#define Y_PROBE_OFFSET_FROM_EXTRUDER 10  // Y offset: -front +behind [the nozzle]
 //#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
-
-// JJJ : PROBE_OFFSET_FROM_EXTRUDER : Z122(0,-57,0) DE200(0,21,0) (Marlin default(10,10,0))
-#define X_PROBE_OFFSET_FROM_EXTRUDER 0    // X offset: -left  +right  [of the nozzle]
-#define Y_PROBE_OFFSET_FROM_EXTRUDER -57  // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER 0    // Z offset: -below +above  [the nozzle]
+//JJJ _PROBE_OFFSET_FROM_EXTRUDER : Z122(0,-57,0) DE200(0,21,0) (Marlin default(10,10,0))
+#define X_PROBE_OFFSET_FROM_EXTRUDER 0  	//JJJ X offset: -left  +right  [of the nozzle]
+#define Y_PROBE_OFFSET_FROM_EXTRUDER -57  	//JJJ Y offset: -front +behind [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   	//JJJ Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
 //#define XY_PROBE_SPEED 8000
-#define XY_PROBE_SPEED 6000		//JJJ 100*60 (default = 133.33*60 = 8000)
+#define XY_PROBE_SPEED 6000		//JJJ XY_PROBE_SPEED 6000=100*60 (default=8000=133.33*60)
 
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Speed for the "accurate" probe of each point
 //#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 8)		//JJJ
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 8)		//JJJ Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 8)
 
 // Use double touch for probing
-#define PROBE_DOUBLE_TOUCH			//JJJ
+#define PROBE_DOUBLE_TOUCH	//JJJ PROBE_DOUBLE_TOUCH
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -750,7 +755,7 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-#define Z_MIN_PROBE_REPEATABILITY_TEST		//JJJ
+#define Z_MIN_PROBE_REPEATABILITY_TEST	//JJJ Z_MIN_PROBE_REPEATABILITY_TEST
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
 // :{ 0:'Low', 1:'High' }
@@ -811,10 +816,9 @@
 // The size of the print bed
 //#define X_BED_SIZE 200
 //#define Y_BED_SIZE 200
-//JJJ With Z122 Head:    (new in 1.1.5)(default:200x200)
-//TODO: try to center all that
-#define X_BED_SIZE 183
-#define Y_BED_SIZE 185
+#define X_BED_SIZE 183	//JJJ X_BED_SIZE 183 -> with Z122
+#define Y_BED_SIZE 200	//JJJ Y_BED_SIZE 200 -> with Z122 AND DE200 gantry moved
+//JJJ TODO: Try to center all that
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1227,7 +1231,7 @@
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cn':'Chinese', 'cz':'Czech', 'cz_utf8':'Czech (UTF8)', 'de':'German', 'el':'Greek', 'el-gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'it':'Italian', 'kana':'Japanese', 'kana_utf8':'Japanese (UTF8)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt-br':'Portuguese (Brazilian)', 'pt-br_utf8':'Portuguese (Brazilian UTF8)', 'pt_utf8':'Portuguese (UTF8)', 'ru':'Russian', 'sk_utf8':'Slovak (UTF8)', 'tr':'Turkish', 'uk':'Ukrainian', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Taiwan)', test':'TEST' }
  */
-#define LCD_LANGUAGE fr		//JJJ is a fucking fr... err... belgian!
+#define LCD_LANGUAGE fr		//JJJ LCD_LANGUAGE fr...enchbashing should be an olympic discipline
 
 /**
  * LCD Character Set
@@ -1251,7 +1255,7 @@
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
-#define DISPLAY_CHARSET_HD44780 JAPANESE
+#define DISPLAY_CHARSET_HD44780 WESTERN
 
 /**
  * LCD TYPE
