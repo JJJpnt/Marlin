@@ -1665,6 +1665,7 @@
 	#define INVERT_CASE_LIGHT false             // Set true if Case Light is ON when pin is LOW
 	#define CASE_LIGHT_DEFAULT_ON true          // Set default power-up state on
 	#define CASE_LIGHT_DEFAULT_BRIGHTNESS 160   // Set default power-up brightness (0-255, requires PWM pin)
+    #define MENU_ITEM_CASE_LIGHT
 #endif
 
 // Support for PCA9632 PWM LED driver
