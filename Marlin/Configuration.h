@@ -366,9 +366,10 @@
 
   //JJJ PID Autocal 20171202_1700 (forgot leds on with bad alim) : 75 loops @ 215° : P33.49 I3.82 D73.38
   //JJJ PID Autocal 20171202_1800 : 75 loops @ 215° : P36.21 I4.06 D80.84
-  #define  DEFAULT_Kp 36.21
-  #define  DEFAULT_Ki 4.06
-  #define  DEFAULT_Kd 80.84
+  //JJJ PID Autocal 20171211_2250 : 25 loops @ 215° : P43.55 I5.91 D80.27
+  #define  DEFAULT_Kp 43.55
+  #define  DEFAULT_Ki 5.91
+  #define  DEFAULT_Kd 80.27
 
   // Ultimaker
   //#define  DEFAULT_Kp 22.2
