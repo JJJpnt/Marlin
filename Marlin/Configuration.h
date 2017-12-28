@@ -297,7 +297,7 @@
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 13
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
 #define DUMMY_THERMISTOR_998_VALUE 25
@@ -327,7 +327,7 @@
 #define HEATER_2_MINTEMP 5
 #define HEATER_3_MINTEMP 5
 #define HEATER_4_MINTEMP 5
-#define BED_MINTEMP 5
+#define BED_MINTEMP 10
 
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
@@ -337,7 +337,7 @@
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
-#define BED_MAXTEMP 150
+#define BED_MAXTEMP 80
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -364,9 +364,10 @@
   //JJJ PID Autocal 20171202_1700 (forgot leds on with bad alim) : 75 loops @ 215° : P33.49 I3.82 D73.38
   //JJJ PID Autocal 20171202_1800 : 75 loops @ 215° : P36.21 I4.06 D80.84
   //JJJ PID Autocal 20171211_2250 : 25 loops @ 215° : P43.55 I5.91 D80.27
-  #define  DEFAULT_Kp 43.55
-  #define  DEFAULT_Ki 5.91
-  #define  DEFAULT_Kd 80.27
+  //JJJ PID Autocal 20171221_0318 : 30 loops @ 225° : P29.18 I3.43 D62.16 (Z122 Résine truc méga cool)
+  #define  DEFAULT_Kp 29.18
+  #define  DEFAULT_Ki 3.43
+  #define  DEFAULT_Kd 62.16
 
   // Ultimaker
   //#define  DEFAULT_Kp 22.2
@@ -397,7 +398,7 @@
 // If your configuration is significantly different than this and you don't understand the issues involved, you probably
 // shouldn't use bed PID until someone else verifies your hardware works.
 // If this is enabled, find your own PID constants below.
-//#define PIDTEMPBED
+#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -405,17 +406,31 @@
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
 // setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
 // so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
-#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER 200 // limits duty cycle to bed; 255=full current
 
 #if ENABLED(PIDTEMPBED)
 
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
+/*JJJ 20171221 8 passes à 60° :
+#define  DEFAULT_bedKp 346.21
+#define  DEFAULT_bedKi 66.04
+#define  DEFAULT_bedKd 453.76
+// 25 passes :
+#define  DEFAULT_bedKp 332.28
+#define  DEFAULT_bedKi 65.42
+#define  DEFAULT_bedKd 421.92
+*/
+	//JJJ 25 passes à 60° 20171221
+	#define  DEFAULT_bedKp 332.28
+	#define  DEFAULT_bedKi 65.42
+	#define  DEFAULT_bedKd 421.92
+
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define  DEFAULT_bedKp 10.00
-  #define  DEFAULT_bedKi .023
-  #define  DEFAULT_bedKd 305.4
+  //#define  DEFAULT_bedKp 10.00
+  //#define  DEFAULT_bedKi .023
+  //#define  DEFAULT_bedKd 305.4
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -438,7 +453,8 @@
 // This option prevents a single extrusion longer than EXTRUDE_MAXLENGTH.
 // Note that for Bowden Extruders a too-small value here may prevent loading.
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 200
+//#define EXTRUDE_MAXLENGTH 200
+#define EXTRUDE_MAXLENGTH 800	//JJJ EXTRUDE_MAXLENGTH 800 (for M600 unload)
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -814,8 +830,8 @@
 // The size of the print bed
 //#define X_BED_SIZE 200
 //#define Y_BED_SIZE 200
-#define X_BED_SIZE 183	//JJJ X_BED_SIZE 183 -> with Z122
-#define Y_BED_SIZE 200	//JJJ Y_BED_SIZE 200 -> with Z122 AND DE200 gantry moved
+#define X_BED_SIZE 185	//temp printeuse ju //JJJ X_BED_SIZE 183 -> with Z122
+#define Y_BED_SIZE 203	//JJJ Y_BED_SIZE 200 -> with Z122 AND DE200 gantry moved
 //JJJ TODO: Try to center all that
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
@@ -823,9 +839,9 @@
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
-//#define Y_MAX_POS Y_BED_SIZE
+#define Y_MAX_POS Y_BED_SIZE
 //#define Z_MAX_POS 200
-#define Y_MAX_POS 202	//JJJ Y_MAX_POS 202 (dago says Y can travel 206mm, but the wall didn't agree :P)
+//#define Y_MAX_POS 203	//JJJ Y_MAX_POS 202 (dago says Y can travel 206mm, but the wall didn't agree :P)
 #define Z_MAX_POS 200	//JJJ Z_MAX_POS 200 (UNCHECKED !!! TODO: Check)
 
 // If enabled, axes won't move below MIN_POS in response to movement commands.
@@ -892,9 +908,9 @@
  *   leveling in steps so you can manually adjust the Z height at each grid-point.
  *   With an LCD controller the process is guided step-by-step.
  */
-#define AUTO_BED_LEVELING_3POINT	//JJJ AUTO_BED_LEVELING_3POINT for now...
+//#define AUTO_BED_LEVELING_3POINT	//JJJ AUTO_BED_LEVELING_3POINT for now...
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -919,10 +935,15 @@
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Set the boundaries for probing (where the probe can reach).
+//  #define LEFT_PROBE_BED_POSITION 15
+//  #define RIGHT_PROBE_BED_POSITION 170
+//  #define FRONT_PROBE_BED_POSITION 20
+//  #define BACK_PROBE_BED_POSITION 170
+//JJJ
   #define LEFT_PROBE_BED_POSITION 15
-  #define RIGHT_PROBE_BED_POSITION 170
-  #define FRONT_PROBE_BED_POSITION 20
-  #define BACK_PROBE_BED_POSITION 170
+  #define RIGHT_PROBE_BED_POSITION X_MAX_POS-15
+  #define FRONT_PROBE_BED_POSITION 15
+  #define BACK_PROBE_BED_POSITION Y_MAX_POS-5+Y_PROBE_OFFSET_FROM_EXTRUDER
 
   // The Z probe minimum outer margin (to validate G29 parameters).
   #define MIN_PROBE_EDGE 10
@@ -934,13 +955,13 @@
 
     // Beyond the probed grid, continue the implied tilt?
     // Default is to maintain the height of the nearest edge.
-    //#define EXTRAPOLATE_BEYOND_GRID
+    #define EXTRAPOLATE_BEYOND_GRID	//JJJ
 
     //
     // Experimental Subdivision of the grid by Catmull-Rom method.
     // Synthesizes intermediate points to produce a more detailed mesh.
     //
-    //#define ABL_BILINEAR_SUBDIVISION
+    #define ABL_BILINEAR_SUBDIVISION	//JJJ
     #if ENABLED(ABL_BILINEAR_SUBDIVISION)
       // Number of subdivisions between probe points
       #define BILINEAR_SUBDIVISIONS 3
@@ -1757,3 +1778,10 @@
 #endif
 
 #endif // CONFIGURATION_H
+#define HEATER_2_MINTEMP 5
+#define HEATER_3_MINTEMP 5
+#define HEATER_4_MINTEMP 5
+#define BED_MINTEMP 10
+
+// When temperature exceeds max temp, your heater will be switched off.
+// This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!

@@ -832,19 +832,19 @@
   #define PAUSE_PARK_XY_FEEDRATE 50          //JJJ PAUSE_PARK_XY_FEEDRATE 50	// X and Y axes feedrate in mm/s (also used for delta printers Z axis)
   #define PAUSE_PARK_Z_FEEDRATE 5             // Z axis feedrate in mm/s (not used for delta printers)
 //  #define PAUSE_PARK_RETRACT_FEEDRATE 60      // Initial retract feedrate in mm/s
-  #define PAUSE_PARK_RETRACT_FEEDRATE 80      //JJJ PAUSE_PARK_RETRACT_FEEDRATE 80	// Initial retract feedrate in mm/s
+  #define PAUSE_PARK_RETRACT_FEEDRATE 70      //JJJ PAUSE_PARK_RETRACT_FEEDRATE 80	// Initial retract feedrate in mm/s
 //  #define PAUSE_PARK_RETRACT_LENGTH 2         // Initial retract in mm
-  #define PAUSE_PARK_RETRACT_LENGTH 5         //JJJ PAUSE_PARK_RETRACT_LENGTH 5	// Initial retract in mm
+  #define PAUSE_PARK_RETRACT_LENGTH 8         //JJJ PAUSE_PARK_RETRACT_LENGTH 5	// Initial retract in mm
                                               // It is a short retract used immediately after print interrupt before move to filament exchange position
 //  #define FILAMENT_CHANGE_UNLOAD_FEEDRATE 10  // Unload filament feedrate in mm/s - filament unloading can be fast
-  #define FILAMENT_CHANGE_UNLOAD_FEEDRATE 30  //JJJ FILAMENT_CHANGE_UNLOAD_FEEDRATE 30	// Unload filament feedrate in mm/s - filament unloading can be fast
+  #define FILAMENT_CHANGE_UNLOAD_FEEDRATE 50  //JJJ FILAMENT_CHANGE_UNLOAD_FEEDRATE 30	// Unload filament feedrate in mm/s - filament unloading can be fast
 //  #define FILAMENT_CHANGE_UNLOAD_LENGTH 100   // Unload filament length from hotend in mm
   #define FILAMENT_CHANGE_UNLOAD_LENGTH 750   //JJJ FILAMENT_CHANGE_UNLOAD_LENGTH 750	// Unload filament length from hotend in mm
                                               // Longer length for bowden printers to unload filament from whole bowden tube,
                                               // shorter length for printers without bowden to unload filament from extruder only,
                                               // 0 to disable unloading for manual unloading
 //  #define FILAMENT_CHANGE_LOAD_FEEDRATE 6     // Load filament feedrate in mm/s - filament loading into the bowden tube can be fast
-  #define FILAMENT_CHANGE_LOAD_FEEDRATE 30     //JJJ FILAMENT_CHANGE_LOAD_FEEDRATE 30	// Load filament feedrate in mm/s - filament loading into the bowden tube can be fast
+  #define FILAMENT_CHANGE_LOAD_FEEDRATE 50     //JJJ FILAMENT_CHANGE_LOAD_FEEDRATE 30	// Load filament feedrate in mm/s - filament loading into the bowden tube can be fast
 //  #define FILAMENT_CHANGE_LOAD_LENGTH 0       // Load filament length over hotend in mm
   #define FILAMENT_CHANGE_LOAD_LENGTH 750     //JJJ FILAMENT_CHANGE_LOAD_LENGTH 750  // Load filament length over hotend in mm
                                               // Longer length for bowden printers to fast load filament into whole bowden tube over the hotend,
