@@ -216,7 +216,7 @@
  * the fan will turn on when any selected extruder is above the threshold.
  */
 //#define E0_AUTO_FAN_PIN -1
-#define E0_AUTO_FAN_PIN 7		//JJJ E0_AUTO_FAN_PIN 7 (on BORAD_MKS_BASE : MOSFET_D_PIN 7) (dagoma did that with some hack)
+#define E0_AUTO_FAN_PIN RAMPS_D8_PIN		//JJJ !!! Voir a ca AVANT de reuploadaer !!! ramps RAMPS_D8_PIN //JJJ E0_AUTO_FAN_PIN 7 (on BORAD_MKS_BASE : MOSFET_D_PIN 7) (dagoma did that with some hack)
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -682,10 +682,10 @@
  * K=0 means advance disabled.
  * See Marlin documentation for calibration instructions.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 
 #if ENABLED(LIN_ADVANCE)
-  #define LIN_ADVANCE_K 75
+  #define LIN_ADVANCE_K 0	//JJJ LIN_ADVANCE_K default off (0)
 
   /**
    * Some Slicers produce Gcode with randomly jumping extrusion widths occasionally.

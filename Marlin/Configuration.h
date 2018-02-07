@@ -126,8 +126,8 @@
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-//  #define MOTHERBOARD BOARD_RAMPS_14_EFB
-  #define MOTHERBOARD BOARD_MKS_BASE	//JJJ MOTHERBOARD BOARD_MKS_BASE
+  #define MOTHERBOARD BOARD_RAMPS_14_EFB	//JJJ RiP MKS_BASE :'(
+//  #define MOTHERBOARD BOARD_MKS_BASE	//JJJ MOTHERBOARD BOARD_MKS_BASE
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
@@ -368,9 +368,10 @@
   //JJJ PID Autocal 20171202_1800 : 75 loops @ 215° : P36.21 I4.06 D80.84
   //JJJ PID Autocal 20171211_2250 : 25 loops @ 215° : P43.55 I5.91 D80.27
   //JJJ PID Autocal 20171221_0318 : 30 loops @ 225° : P29.18 I3.43 D62.16 (Z122 Résine truc méga cool)
-  #define  DEFAULT_Kp 29.18
-  #define  DEFAULT_Ki 3.43
-  #define  DEFAULT_Kd 62.16
+  //JJJ PID Autocal 20180118_0000 : 30 loops @ 210° : P27.56 I3.11 D60.95
+  #define  DEFAULT_Kp 27.56
+  #define  DEFAULT_Ki 3.11
+  #define  DEFAULT_Kd 60.95
 
   // Ultimaker
   //#define  DEFAULT_Kp 22.2
@@ -566,7 +567,9 @@
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 //JJJ note : E Calib 20171105 = 99.04 but using dago's value 98 for firmware
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 2560, 98 }	//JJJ DEFAULT_AXIS_STEPS_PER_UNIT
+												//JJJ Trapezos (Z -> 400)
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 99.04 }	//JJJ DEFAULT_AXIS_STEPS_PER_UNIT
+																
 
 
 /**
@@ -583,7 +586,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 10000 }	//JJJ Trying 2000 from 20171203_1931
+#define DEFAULT_MAX_ACCELERATION      { 2500, 1700, 100, 10000 }	//JJJ Seems good now !!! Maybe E 5000?
 //#define DEFAULT_MAX_ACCELERATION      { 6000, 3000, 100, 10000 }	//JJJ DEFAULT_MAX_ACCELERATION previous values
 //#define DEFAULT_MAX_ACCELERATION      { 9000, 3000, 100, 10000 }	//JJJ DEFAULT_MAX_ACCELERATION Dago values
 
@@ -611,9 +614,13 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
+//#define DEFAULT_XJERK                 10.0		//Defaults
+//#define DEFAULT_YJERK                 10.0
+//#define DEFAULT_ZJERK                  0.3
+//#define DEFAULT_EJERK                  5.0
 #define DEFAULT_XJERK                 10.0
 #define DEFAULT_YJERK                 10.0
-#define DEFAULT_ZJERK                  0.3
+#define DEFAULT_ZJERK                  0.15		//JJJ 
 #define DEFAULT_EJERK                  5.0
 
 //===========================================================================
@@ -836,7 +843,8 @@
 // The size of the print bed
 //#define X_BED_SIZE 200
 //#define Y_BED_SIZE 200
-#define X_BED_SIZE 185	//temp printeuse ju //JJJ X_BED_SIZE 183 -> with Z122
+//#define X_BED_SIZE 185	//temp printeuse ju //JJJ X_BED_SIZE 183 -> with Z122
+#define X_BED_SIZE 186	//chariots z122 TEMP
 #define Y_BED_SIZE 203	//JJJ Y_BED_SIZE 200 -> with Z122 AND DE200 gantry moved
 //JJJ TODO: Try to center all that
 
@@ -931,8 +939,8 @@
  */
 //#define AUTO_BED_LEVELING_3POINT	//JJJ AUTO_BED_LEVELING_3POINT for now...
 //#define AUTO_BED_LEVELING_LINEAR
-#define AUTO_BED_LEVELING_BILINEAR
-//#define AUTO_BED_LEVELING_UBL
+//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_UBL	//JJJ UBL, Here we go again...
 //#define MESH_BED_LEVELING
 
 /**
