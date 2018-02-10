@@ -21,8 +21,8 @@
  */
 
 /**
- *  JJJ Marlin 1.1.6 version personnelle par JJJ pour JJJ
- *  Dagoma DE200 avec tête Z122 v.Z122_20171228_1620
+ *  JJJ Marlin 1.1.8 version personnelle par JJJ pour JJJ
+ *  Dagoma DE200 avec tête Z122 v.Z122_20180208_1700
  */
 
 /**
@@ -133,7 +133,7 @@
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 //#define CUSTOM_MACHINE_NAME "3D Printer"
-#define CUSTOM_MACHINE_NAME "DiscoEasy200"	//JJJ CUSTOM_MACHINE_NAME "DiscoEasy200"
+#define CUSTOM_MACHINE_NAME "DiscoZ122"	//JJJ CUSTOM_MACHINE_NAME "DiscoZ122"
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
@@ -891,7 +891,7 @@
  * For other boards you may need to define FIL_RUNOUT_PIN.
  * By default the firmware assumes HIGH = has filament, LOW = ran out
  */
-#define FILAMENT_RUNOUT_SENSOR	//JJJ FILAMENT_RUNOUT_SENSOR
+//#define FILAMENT_RUNOUT_SENSOR	//JJJ FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_INVERTING false // set to true to invert the logic of the sensor.
   #define ENDSTOPPULLUP_FIL_RUNOUT // Uncomment to use internal pullup for filament runout pins if the sensor is defined.
@@ -1231,12 +1231,12 @@
 
 // Preheat Constants
 #define PREHEAT_1_TEMP_HOTEND 180
-#define PREHEAT_1_TEMP_BED     70
+#define PREHEAT_1_TEMP_BED     45
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
 //#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_HOTEND 210	//JJJ PREHEAT_2_TEMP_HOTEND 210
-#define PREHEAT_2_TEMP_BED    110
+#define PREHEAT_2_TEMP_HOTEND 180	//JJJ PREHEAT_2_TEMP_HOTEND 210
+#define PREHEAT_2_TEMP_BED    60
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 /**
@@ -1370,7 +1370,7 @@
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cn':'Chinese', 'cz':'Czech', 'cz_utf8':'Czech (UTF8)', 'de':'German', 'el':'Greek', 'el-gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'fr_utf8':'French (UTF8)', 'gl':'Galician', 'hr':'Croatian', 'it':'Italian', 'kana':'Japanese', 'kana_utf8':'Japanese (UTF8)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt-br':'Portuguese (Brazilian)', 'pt-br_utf8':'Portuguese (Brazilian UTF8)', 'pt_utf8':'Portuguese (UTF8)', 'ru':'Russian', 'sk_utf8':'Slovak (UTF8)', 'tr':'Turkish', 'uk':'Ukrainian', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Taiwan)', test':'TEST' }
  */
-#define LCD_LANGUAGE fr		//JJJ LCD_LANGUAGE fr...enchbashing should be an olympic discipline
+#define LCD_LANGUAGE fr_utf8		//JJJ LCD_LANGUAGE fr...enchbashing should be an olympic discipline
 
 /**
  * LCD Character Set

@@ -215,8 +215,8 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-//#define E0_AUTO_FAN_PIN -1
-#define E0_AUTO_FAN_PIN RAMPS_D8_PIN		//JJJ !!! Voir a ca AVANT de reuploadaer !!! ramps RAMPS_D8_PIN //JJJ E0_AUTO_FAN_PIN 7 (on BORAD_MKS_BASE : MOSFET_D_PIN 7) (dagoma did that with some hack)
+#define E0_AUTO_FAN_PIN -1
+//#define E0_AUTO_FAN_PIN RAMPS_D8_PIN		//JJJ !!! Voir a ca AVANT de reuploadaer !!! ramps RAMPS_D8_PIN //JJJ E0_AUTO_FAN_PIN 7 (on BORAD_MKS_BASE : MOSFET_D_PIN 7) (dagoma did that with some hack)
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -891,7 +891,7 @@
 //  #define FILAMENT_CHANGE_UNLOAD_FEEDRATE 10  // Unload filament feedrate in mm/s - filament unloading can be fast
   #define FILAMENT_CHANGE_UNLOAD_FEEDRATE 50  //JJJ FILAMENT_CHANGE_UNLOAD_FEEDRATE 50	// Unload filament feedrate in mm/s - filament unloading can be fast
 //  #define FILAMENT_CHANGE_UNLOAD_LENGTH 100   // Unload filament length from hotend in mm
-  #define FILAMENT_CHANGE_UNLOAD_LENGTH 750   //JJJ FILAMENT_CHANGE_UNLOAD_LENGTH 750	// Unload filament length from hotend in mm
+  #define FILAMENT_CHANGE_UNLOAD_LENGTH 0   //JJJ FILAMENT_CHANGE_UNLOAD_LENGTH 750	// Unload filament length from hotend in mm
                                               // Longer length for bowden printers to unload filament from whole bowden tube,
                                               // shorter length for printers without bowden to unload filament from extruder only,
                                               // 0 to disable unloading for manual unloading
