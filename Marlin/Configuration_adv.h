@@ -215,8 +215,8 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-//#define E0_AUTO_FAN_PIN -1
-#define E0_AUTO_FAN_PIN RAMPS_D8_PIN		//JJJ !!! Voir a ca AVANT de reuploadaer !!! ramps RAMPS_D8_PIN //JJJ E0_AUTO_FAN_PIN 7 (on BORAD_MKS_BASE : MOSFET_D_PIN 7) (dagoma did that with some hack)
+#define E0_AUTO_FAN_PIN -1 // remis par JPLt 21/01/2018
+//#define E0_AUTO_FAN_PIN 7		//JJJ E0_AUTO_FAN_PIN 7 (on BORAD_MKS_BASE : MOSFET_D_PIN 7) (dagoma did that with some hack)
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -354,8 +354,8 @@
 #define X_HOME_BUMP_MM 5
 #define Y_HOME_BUMP_MM 5
 #define Z_HOME_BUMP_MM 2
-//#define HOMING_BUMP_DIVISOR { 2, 2, 4 }  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
-#define HOMING_BUMP_DIVISOR { 2, 2, 8 }  //JJJ HOMING_BUMP_DIVISOR { 2, 2, 4 }
+//#define HOMING_BUMP_DIVISOR {2, 2, 4 }  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
+#define HOMING_BUMP_DIVISOR {2, 2, 8 }  //JJJ HOMING_BUMP_DIVISOR { 2, 2, 4 }
 //#define QUICK_HOME                     // If homing includes X and Y, do a diagonal move initially
 #define QUICK_HOME                     //JJJ QUICK_HOME
 
@@ -584,7 +584,7 @@
   //#define LONG_FILENAME_HOST_SUPPORT
 
   // Enable this option to scroll long filenames in the SD card menu
-  //#define SCROLL_LONG_FILENAMES
+  #define SCROLL_LONG_FILENAMES		//JJJ 20180210 bonus ;)
 
   /**
    * This option allows you to abort SD printing when any endstop is triggered.
@@ -665,7 +665,7 @@
   //#define BABYSTEP_XY              // Also enable X/Y Babystepping. Not supported on DELTA!
   #define BABYSTEP_INVERT_Z false    // Change if Z babysteps should go the other way
 //  #define BABYSTEP_MULTIPLICATOR 1   // Babysteps are very small. Increase for faster motion.
-  #define BABYSTEP_MULTIPLICATOR 25   //JJJ BABYSTEP_MULTIPLICATOR 25
+  #define BABYSTEP_MULTIPLICATOR 5   //JJJ BABYSTEP_MULTIPLICATOR 25
   //#define BABYSTEP_ZPROBE_OFFSET   // Enable to combine M851 and Babystepping
   #define DOUBLECLICK_FOR_Z_BABYSTEPPING	//JJJ DOUBLECLICK_FOR_Z_BABYSTEPPING // Double-click on the Status Screen for Z Babystepping.
   #define DOUBLECLICK_MAX_INTERVAL 1250 // Maximum interval between clicks, in milliseconds.

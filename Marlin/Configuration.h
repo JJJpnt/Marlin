@@ -21,8 +21,8 @@
  */
 
 /**
- *  JJJ Marlin 1.1.6 version personnelle par JJJ pour JJJ
- *  Dagoma DE200 avec tête Z122 v.Z122_20171228_1620
+ *  JJJ Marlin 1.1.8 version personnelle par JJJ pour JPLR aka Z122
+ *  Dagoma DE200 + Z122 = DiscoZ122 v.Z122_20180210_1630
  */
 
 /**
@@ -79,12 +79,12 @@
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_CONFIG_H_AUTHOR "J-J.J."	//JJJ STRING_CONFIG_H_AUTHOR	// Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "JJJ&Z122"	//JJJ STRING_CONFIG_H_AUTHOR	// Who made the changes.
 #define SHOW_BOOTSCREEN
 //#define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
 #define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION " mod. by JJJ" //JJJ STRING_SPLASH_LINE1
 //#define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
-#define STRING_SPLASH_LINE2 "171202 - Head by Z122"	//JJJ STRING_SPLASH_LINE2
+#define STRING_SPLASH_LINE2 "180218 - Head by Z122"	//JJJ STRING_SPLASH_LINE2
 
 //
 // *** VENDORS PLEASE READ *****************************************************
@@ -133,7 +133,7 @@
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 //#define CUSTOM_MACHINE_NAME "3D Printer"
-#define CUSTOM_MACHINE_NAME "DiscoEasy200"	//JJJ CUSTOM_MACHINE_NAME "DiscoEasy200"
+#define CUSTOM_MACHINE_NAME "DiscoZ122"	//JJJ CUSTOM_MACHINE_NAME "DiscoEasy200"
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
@@ -143,13 +143,13 @@
 
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5]
-#define EXTRUDERS 1
+#define EXTRUDERS 2
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
-//#define SINGLENOZZLE
+#define SINGLENOZZLE
 
 /**
  * PrÅ¯Å¡a MK2 Single Nozzle Multi-Material Multiplexer, and variants.
@@ -300,7 +300,7 @@
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 75
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
 #define DUMMY_THERMISTOR_998_VALUE 25
@@ -340,7 +340,7 @@
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
-#define BED_MAXTEMP 80
+#define BED_MAXTEMP 100 // Modif 100 instead of 150 Z122 2017-12-25
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -364,14 +364,10 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
-  //JJJ PID Autocal 20171202_1700 (forgot leds on with bad alim) : 75 loops @ 215° : P33.49 I3.82 D73.38
-  //JJJ PID Autocal 20171202_1800 : 75 loops @ 215° : P36.21 I4.06 D80.84
-  //JJJ PID Autocal 20171211_2250 : 25 loops @ 215° : P43.55 I5.91 D80.27
-  //JJJ PID Autocal 20171221_0318 : 30 loops @ 225° : P29.18 I3.43 D62.16 (Z122 Résine truc méga cool)
-  //JJJ PID Autocal 20180118_0000 : 30 loops @ 210° : P27.56 I3.11 D60.95
-  #define  DEFAULT_Kp 27.56
-  #define  DEFAULT_Ki 3.11
-  #define  DEFAULT_Kd 60.95
+  //JPLR M301 P126.27 I24.08 D165.51
+  #define  DEFAULT_Kp 126.27
+  #define  DEFAULT_Ki 24.08
+  #define  DEFAULT_Kd 165.51
 
   // Ultimaker
   //#define  DEFAULT_Kp 22.2
@@ -410,31 +406,17 @@
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
 // setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
 // so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
-#define MAX_BED_POWER 200 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
 
 #if ENABLED(PIDTEMPBED)
 
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-/*JJJ 20171221 8 passes à 60° :
-#define  DEFAULT_bedKp 346.21
-#define  DEFAULT_bedKi 66.04
-#define  DEFAULT_bedKd 453.76
-// 25 passes :
-#define  DEFAULT_bedKp 332.28
-#define  DEFAULT_bedKi 65.42
-#define  DEFAULT_bedKd 421.92
-*/
-	//JJJ 25 passes à 60° 20171221
-	#define  DEFAULT_bedKp 332.28
-	#define  DEFAULT_bedKi 65.42
-	#define  DEFAULT_bedKd 421.92
-
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  //#define  DEFAULT_bedKp 10.00
-  //#define  DEFAULT_bedKi .023
-  //#define  DEFAULT_bedKd 305.4
+  #define  DEFAULT_bedKp 10.00
+  #define  DEFAULT_bedKi .023
+  #define  DEFAULT_bedKd 305.4
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -567,7 +549,7 @@
  */
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 }
 //JJJ note : E Calib 20171105 = 99.04 but using dago's value 98 for firmware
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 2560, 98 }	//JJJ DEFAULT_AXIS_STEPS_PER_UNIT
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 98 }	//JPLR DEFAULT_AXIS_STEPS_PER_UNIT Mis pour trapezos (Melzi: M92 X80.00 Y80.00 Z2560.00 E98.00)
 
 
 /**
@@ -576,7 +558,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
 //#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 150 }	//JJJ DEFAULT_MAX_FEEDRATE
+#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 150 }	//JPLR DEFAULT_MAX_FEEDRATE (Melzi: M203 X500.00 Y500.00 Z4.00 E25.00)
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -620,6 +602,10 @@
 #define DEFAULT_YJERK                 10.0
 #define DEFAULT_ZJERK                  0.15		//JJJ 
 #define DEFAULT_EJERK                  5.0
+//JPLR Advanced variables: S=Min feedrate (mm/s), T=Min travel feedrate (mm/s), B=minimum segment time (ms), X=maximum XY jerk (mm/s),  Z=maximum Z jerk (mm/s),  E=maximum E jerk (mm/s)
+//  M205 S0.00 T0.00 B20000 X20.00 Z0.40 E5.00
+//	Pareil au M204, semble avoir change depuis la version du marlin dans la melzi mais valeurs semblables
+
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -739,7 +725,7 @@
 //JJJ _PROBE_OFFSET_FROM_EXTRUDER : Z122(0,-57,0) DE200(0,21,0) (Marlin default(10,10,0))
 #define X_PROBE_OFFSET_FROM_EXTRUDER 0  	//JJJ X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER -57  	//JJJ Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   	//JJJ Z offset: -below +above  [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -3   	//JJJ Z offset: -below +above  [the nozzle]  modif-3 JPLt 2018-01-21
 
 // X and Y axis travel speed (mm/m) between probes
 //#define XY_PROBE_SPEED 8000
@@ -841,29 +827,22 @@
 // The size of the print bed
 //#define X_BED_SIZE 200
 //#define Y_BED_SIZE 200
-//#define X_BED_SIZE 185	//temp printeuse ju //JJJ X_BED_SIZE 183 -> with Z122
-#define X_BED_SIZE 186	//chariots z122 TEMP
-#define Y_BED_SIZE 203	//JJJ Y_BED_SIZE 200 -> with Z122 AND DE200 gantry moved
+#define X_BED_SIZE 210	//JJJ X_BED_SIZE 183 -> with Z122     // 210  JPLt 2018-01-08
+#define Y_BED_SIZE 210	//JJJ Y_BED_SIZE 200 -> with Z122 AND DE200 gantry moved // 210   JPLt 2018-01-08
 //JJJ TODO: Try to center all that
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS 0
+#define X_MIN_POS -42 // modif -42 au lieu de 0 suivant conseil de Dal 2018-01-08
+#define Y_MIN_POS -4 
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE
-#define Y_MAX_POS Y_BED_SIZE
+#define X_MAX_POS 255 // modid X_BED_SIZE par 297-42=255   JPLt 2018-01-08
+#define Y_MAX_POS 215	//JJJ Y_MAX_POS 202 (dago says Y can travel 206mm, but the wall didn't agree :P) // 2019   JPLt 2018-01-08
+//#define Y_MAX_POS Y_BED_SIZE
+#define Z_MAX_POS 205	//JJJ Z_MAX_POS 200 (checked by JPLt 2018-01-21)
 //#define Z_MAX_POS 200
-//#define Y_MAX_POS 203	//JJJ Y_MAX_POS 202 (dago says Y can travel 206mm, but the wall didn't agree :P)
-#define Z_MAX_POS 200	//JJJ Z_MAX_POS 200 (UNCHECKED !!! TODO: Check)
-
-/**
- * Software Endstops
- *
- * - Prevent moves outside the set machine bounds.
- * - Individual axes can be disabled, if desired.
- * - X and Y only apply to Cartesian robots.
- * - Use 'M211' to set software endstops on/off or report current state
- */
+// Les deux lignes qui suivent ne sont pas dans le marlin original  ajouté par JPLt 2017-12-25 
+//#define MANUAL_X_HOME_POS -42   // SUPPRIME PAR JPL 2018-01-08
+//#define MANUAL_Y_HOME_POS 219   // SUPPRIME PAR JPL 2018-01-08
 
 // Min software endstops curtail movement below minimum coordinate bounds
 #define MIN_SOFTWARE_ENDSTOPS
@@ -891,7 +870,7 @@
  */
 #define FILAMENT_RUNOUT_SENSOR	//JJJ FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
-  #define FIL_RUNOUT_INVERTING false // set to true to invert the logic of the sensor.
+  #define FIL_RUNOUT_INVERTING true // set to true to invert the logic of the sensor.2018/01/21 set to true pour un NF by JPLt
   #define ENDSTOPPULLUP_FIL_RUNOUT // Uncomment to use internal pullup for filament runout pins if the sensor is defined.
 //  #define FILAMENT_RUNOUT_SCRIPT "M600"
   #define FILAMENT_RUNOUT_SCRIPT "M117 Runout !!!\nM300 P500\nM600" //JJJ FILAMENT_RUNOUT_SCRIPT
@@ -1117,8 +1096,10 @@
 #define Z_SAFE_HOMING	//JJJ Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
-  #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axes (G28).
+  //#define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axis (G28). 
+  //#define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axis (G28). 
+  #define Z_SAFE_HOMING_X_POINT (105)    // X point for Z homing when homing all axis (G28). // course moyenne X (252-42)/2=105 JPlt 2018-01-08
+  #define Z_SAFE_HOMING_Y_POINT (109)    // Y point for Z homing when homing all axis (G28). // course moyenne Y 219/2=109 JPlt 2018-01-08
 #endif
 
 // Homing speeds (mm/m)
@@ -1228,13 +1209,13 @@
 // @section temperature
 
 // Preheat Constants
-#define PREHEAT_1_TEMP_HOTEND 180
-#define PREHEAT_1_TEMP_BED     70
+#define PREHEAT_1_TEMP_HOTEND 205 // modifie a 205 au lieu de 180 JPLt 2018-01-08
+#define PREHEAT_1_TEMP_BED     40 // modifie a 40 au lieu de 70 JPLt 2017-01-03
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
 //#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_HOTEND 210	//JJJ PREHEAT_2_TEMP_HOTEND 210
-#define PREHEAT_2_TEMP_BED    110
+#define PREHEAT_2_TEMP_HOTEND 215	//JJJ PREHEAT_2_TEMP_HOTEND 210 // modifié à 215 au lieu de 210 JPLt 2018-01-08
+#define PREHEAT_2_TEMP_BED    40 // modifie a 40 au lieu de 110 JPLt 2017-01-03
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 /**
@@ -1297,6 +1278,7 @@
  *
  */
 //#define NOZZLE_CLEAN_FEATURE
+#define NOZZLE_CLEAN_FEATURE // pour tester JPLt 2018-01-08
 
 #if ENABLED(NOZZLE_CLEAN_FEATURE)
   // Default number of pattern repetitions
@@ -1368,7 +1350,7 @@
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cn':'Chinese', 'cz':'Czech', 'cz_utf8':'Czech (UTF8)', 'de':'German', 'el':'Greek', 'el-gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'fr_utf8':'French (UTF8)', 'gl':'Galician', 'hr':'Croatian', 'it':'Italian', 'kana':'Japanese', 'kana_utf8':'Japanese (UTF8)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt-br':'Portuguese (Brazilian)', 'pt-br_utf8':'Portuguese (Brazilian UTF8)', 'pt_utf8':'Portuguese (UTF8)', 'ru':'Russian', 'sk_utf8':'Slovak (UTF8)', 'tr':'Turkish', 'uk':'Ukrainian', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Taiwan)', test':'TEST' }
  */
-#define LCD_LANGUAGE fr		//JJJ LCD_LANGUAGE fr...enchbashing should be an olympic discipline
+#define LCD_LANGUAGE fr_utf8		//JJJ LCD_LANGUAGE fr...enchbashing should be an olympic discipline
 
 /**
  * LCD Character Set
@@ -1462,7 +1444,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-#define REVERSE_ENCODER_DIRECTION	//JJJ REVERSE_ENCODER_DIRECTION
+// #define REVERSE_ENCODER_DIRECTION	//JJJ REVERSE_ENCODER_DIRECTION et Modif par JPLt 2018-01-07
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -1470,14 +1452,14 @@
 //  If CLOCKWISE normally moves DOWN this makes it go UP.
 //  If CLOCKWISE normally moves UP this makes it go DOWN.
 //
-//#define REVERSE_MENU_DIRECTION
+#define REVERSE_MENU_DIRECTION    /// Modif par JPLt 2018-01-07
 
 //
 // Individual Axis Homing
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-//#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_MENU       /// Modif par JPLt 2018-01-07
 
 //
 // SPEAKER/BUZZER
@@ -1485,7 +1467,7 @@
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-//#define SPEAKER
+#define SPEAKER    /// Modif par JPLt 2018-01-07
 
 //
 // The duration and frequency for the UI feedback sound.
@@ -1494,8 +1476,10 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 100
-//#define LCD_FEEDBACK_FREQUENCY_HZ 1000
+// #define LCD_FEEDBACK_FREQUENCY_DURATION_MS 100
+#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 20     /// Modif par JPLt 2017-01-07
+// #define LCD_FEEDBACK_FREQUENCY_HZ 1000
+ 
 
 //
 // CONTROLLER TYPE: Standard

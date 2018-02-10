@@ -56,6 +56,9 @@
 #include "utility.h"
 #include "duration_t.h"
 
+int nb_couche=0; //numero de la couche en cours - Ajout Z122 2017-12-26
+float z_en_cours; // position Z en cours - Ajout Z122 2017-12-26
+
 #include <U8glib.h>
 
 #if ENABLED(AUTO_BED_LEVELING_UBL)
@@ -698,6 +701,52 @@ static void lcd_implementation_status_screen() {
     }
   }
 
+//affichage du numero de couche - copie de firmware de GyveBlaster - Z122 2017-12-26
+ 
+    if (z_en_cours > current_position[Z_AXIS]) // test si extrudeur est redescendu
+    {
+        nb_couche = 1; // impression première couche
+        z_en_cours = current_position[Z_AXIS];
+    }
+    
+    // test du changement de niveau de la couche
+    if (z_en_cours != current_position[Z_AXIS])
+    {
+        nb_couche++;// incrementation du nombre de couche
+        z_en_cours = current_position[Z_AXIS];
+    } 
+    //u8g.drawBox(0,0,127,63);
+    u8g.drawBox(62,3,5,1);
+    u8g.drawBox(61,4,7,4);
+    u8g.drawBox(62,8,5,1);
+    u8g.drawBox(63,9,3,1);
+    u8g.drawBox(64,10,1,1);
+    u8g.drawBox(57,11,7,1);
+    u8g.drawBox(57,13,15,1);
+    u8g.drawBox(57,15,15,1);
+    u8g.drawBox(57,17,15,1);
+
+    if (nb_couche < 10)
+      u8g.setPrintPos(62, 28);
+    if (nb_couche >= 10 && nb_couche < 100)
+      u8g.setPrintPos(58, 28);
+    if (nb_couche >= 100 && nb_couche < 1000)
+      u8g.setPrintPos(56, 28);
+    if (nb_couche >= 1000 && nb_couche < 10000)
+      u8g.setPrintPos(53, 28);
+       
+    char buf[5];
+    itoa(nb_couche, buf, 10);
+    lcd_print(buf);
+
+       
+       
+    //u8g.setPrintPos(40, 28);
+    //lcd_print('C');
+    //lcd_print(ftostr52sp(nb_couche));  
+
+    // fin de copie de firmware de GyveBlaster - Z122 2017-12-26
+    
   //
   // Feedrate
   //
