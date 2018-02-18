@@ -118,10 +118,11 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000
+//#define BAUDRATE 250000
+#define BAUDRATE 230400
 
 // Enable the Bluetooth serial interface on AT90USB devices
-//#define BLUETOOTH
+#define BLUETOOTH
 
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
@@ -797,7 +798,7 @@
 #define DISABLE_Y false
 #define DISABLE_Z false
 // Warn on display about possibly reduced accuracy
-//#define DISABLE_REDUCED_ACCURACY_WARNING
+#define DISABLE_REDUCED_ACCURACY_WARNING	//JJJ DISABLE_REDUCED_ACCURACY_WARNING
 
 // @section extruder
 
@@ -1479,7 +1480,7 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-//#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_MENU		//JJJ INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
@@ -1487,7 +1488,7 @@
 // If you have a speaker that can produce tones, enable it here.
 // By default Marlin assumes you have a buzzer with a fixed frequency.
 //
-//#define SPEAKER
+#define SPEAKER			//JJJ SPEAKER
 
 //
 // The duration and frequency for the UI feedback sound.
