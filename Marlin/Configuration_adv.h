@@ -134,7 +134,7 @@
 #endif
 
 // Show extra position information in M114
-//#define M114_DETAIL
+#define M114_DETAIL
 
 // Show Temperature ADC value
 // Enable for M105 to include ADC values read from temperature sensors.
@@ -174,7 +174,7 @@
 // then extrude some filament every couple of SECONDS.
 //#define EXTRUDER_RUNOUT_PREVENT
 #if ENABLED(EXTRUDER_RUNOUT_PREVENT)
-  #define EXTRUDER_RUNOUT_MINTEMP 190
+  #define EXTRUDER_RUNOUT_MINTEMP 180
   #define EXTRUDER_RUNOUT_SECONDS 30
   #define EXTRUDER_RUNOUT_SPEED 1500  // mm/m
   #define EXTRUDER_RUNOUT_EXTRUDE 5   // mm
@@ -220,7 +220,8 @@
  *
  * Define one or both of these to override the default 0-255 range.
  */
-//#define FAN_MIN_PWM 50
+ //#define FAN_MIN_PWM 50
+#define FAN_MIN_PWM 35
 //#define FAN_MAX_PWM 128
 
 // @section extruder
@@ -379,8 +380,8 @@
 // Homing hits each endstop, retracts by these distances, then does a slower bump.
 #define X_HOME_BUMP_MM 5
 #define Y_HOME_BUMP_MM 5
-#define Z_HOME_BUMP_MM 2
-#define HOMING_BUMP_DIVISOR { 2, 2, 4 }  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
+#define Z_HOME_BUMP_MM 5
+#define HOMING_BUMP_DIVISOR { 3, 3, 3 }  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 //#define QUICK_HOME                     // If homing includes X and Y, do a diagonal move initially
 
 // When G28 is called, this option will make Y home before X
@@ -405,7 +406,7 @@
 // Default stepper release if idle. Set to 0 to deactivate.
 // Steppers will shut down DEFAULT_STEPPER_DEACTIVE_TIME seconds after the last move when DISABLE_INACTIVE_? is true.
 // Time can be set by M18 and M84.
-#define DEFAULT_STEPPER_DEACTIVE_TIME 120
+#define DEFAULT_STEPPER_DEACTIVE_TIME 240
 #define DISABLE_INACTIVE_X true
 #define DISABLE_INACTIVE_Y true
 #define DISABLE_INACTIVE_Z true  // set to false if the nozzle will fall down on your printed part when print has finished.
@@ -419,7 +420,7 @@
 // @section lcd
 
 #if ENABLED(ULTIPANEL)
-  #define MANUAL_FEEDRATE {50*60, 50*60, 4*60, 60} // Feedrates for manual moves along X, Y, Z, E from panel
+  #define MANUAL_FEEDRATE {50*60, 50*60, 50*60, 10*60} // Feedrates for manual moves along X, Y, Z, E from panel
   #define ULTIPANEL_FEEDMULTIPLY  // Comment to disable setting feedrate multiplier via encoder
 #endif
 
@@ -455,7 +456,7 @@
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
  */
-//#define ADAPTIVE_STEP_SMOOTHING
+#define ADAPTIVE_STEP_SMOOTHING
 
 // Microstep setting (Only functional when stepper driver microstep pins are connected to MCU.
 #define MICROSTEP_MODES { 16, 16, 16, 16, 16 } // [1,2,4,8,16]
@@ -519,19 +520,19 @@
 // @section lcd
 
 // Include a page of printer information in the LCD Main Menu
-//#define LCD_INFO_MENU
+#define LCD_INFO_MENU
 
 // Scroll a longer status message into view
-//#define STATUS_MESSAGE_SCROLLING
+#define STATUS_MESSAGE_SCROLLING
 
 // On the Info Screen, display XY with one decimal place when possible
 //#define LCD_DECIMAL_SMALL_XY
 
 // The timeout (in ms) to return to the status screen from sub-menus
-//#define LCD_TIMEOUT_TO_STATUS 15000
+#define LCD_TIMEOUT_TO_STATUS 20000
 
 // Add an 'M73' G-code to set the current percentage
-//#define LCD_SET_PROGRESS_MANUALLY
+#define LCD_SET_PROGRESS_MANUALLY
 
 #if ENABLED(SDSUPPORT) || ENABLED(LCD_SET_PROGRESS_MANUALLY)
   //#define LCD_PROGRESS_BAR              // Show a progress bar on HD44780 LCDs for SD printing
@@ -578,7 +579,7 @@
   #define SDCARD_RATHERRECENTFIRST
 
   // Add an option in the menu to run all auto#.g files
-  //#define MENU_ADDAUTOSTART
+  #define MENU_ADDAUTOSTART
 
   /**
    * Continue after Power-Loss (Creality3D)
@@ -629,10 +630,10 @@
   #endif
 
   // This allows hosts to request long names for files and folders with M33
-  //#define LONG_FILENAME_HOST_SUPPORT
+  #define LONG_FILENAME_HOST_SUPPORT
 
   // Enable this option to scroll long filenames in the SD card menu
-  //#define SCROLL_LONG_FILENAMES
+  #define SCROLL_LONG_FILENAMES
 
   /**
    * This option allows you to abort SD printing when any endstop is triggered.
@@ -646,12 +647,12 @@
    * On print completion the LCD Menu will open with the file selected.
    * You can just click to start the print, or navigate elsewhere.
    */
-  //#define SD_REPRINT_LAST_SELECTED_FILE
+  #define SD_REPRINT_LAST_SELECTED_FILE
 
   /**
    * Auto-report SdCard status with M27 S<seconds>
    */
-  //#define AUTO_REPORT_SD_STATUS
+  #define AUTO_REPORT_SD_STATUS
 
 #endif // SDSUPPORT
 
@@ -669,7 +670,7 @@
  */
 #if ENABLED(DOGLCD)
   // Show SD percentage next to the progress bar
-  //#define DOGM_SD_PERCENT
+  #define DOGM_SD_PERCENT
 
   // Enable to save many cycles by drawing a hollow frame on the Info Screen
   #define XYZ_HOLLOW_FRAME
@@ -687,7 +688,7 @@
 
   // Enable this option and reduce the value to optimize screen updates.
   // The normal delay is 10µs. Use the lowest value that still gives a reliable display.
-  //#define DOGM_SPI_DELAY_US 5
+  #define DOGM_SPI_DELAY_US 5
 
   // Swap the CW/CCW indicators in the graphics overlay
   //#define OVERLAY_GFX_REVERSE
@@ -735,13 +736,13 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define BABYSTEP_XY              // Also enable X/Y Babystepping. Not supported on DELTA!
   #define BABYSTEP_INVERT_Z false    // Change if Z babysteps should go the other way
   #define BABYSTEP_MULTIPLICATOR 1   // Babysteps are very small. Increase for faster motion.
   //#define BABYSTEP_ZPROBE_OFFSET   // Enable to combine M851 and Babystepping
-  //#define DOUBLECLICK_FOR_Z_BABYSTEPPING // Double-click on the Status Screen for Z Babystepping.
+  #define DOUBLECLICK_FOR_Z_BABYSTEPPING // Double-click on the Status Screen for Z Babystepping.
   #define DOUBLECLICK_MAX_INTERVAL 1250 // Maximum interval between clicks, in milliseconds.
                                         // Note: Extra time may be added to mitigate controller latency.
   //#define BABYSTEP_ZPROBE_GFX_OVERLAY // Enable graphical overlay on Z-offset editor
@@ -765,10 +766,10 @@
  * See http://marlinfw.org/docs/features/lin_advance.html for full instructions.
  * Mention @Sebastianv650 on GitHub to alert the author of any issues.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
-  #define LIN_ADVANCE_K 0.22  // Unit: mm compression per 1mm/s extruder speed
-  //#define LA_DEBUG          // If enabled, this will generate debug information output over USB.
+  #define LIN_ADVANCE_K 0.45  //0.22  // Unit: mm compression per 1mm/s extruder speed
+  #define LA_DEBUG          // If enabled, this will generate debug information output over USB.
 #endif
 
 // @section leveling
@@ -841,7 +842,8 @@
  * 1500 : Minimum for TB6600 drivers (guess, no info in datasheet)
  *15000 : Minimum for TB6560 drivers (guess, no info in datasheet)
  */
-#define MINIMUM_STEPPER_DIR_DELAY 0
+// #define MINIMUM_STEPPER_DIR_DELAY 0
+ #define MINIMUM_STEPPER_DIR_DELAY 20
 
 /**
  * Minimum stepper driver pulse width (in µs)
@@ -852,7 +854,8 @@
  *   3 : Minimum for TB6600 stepper drivers
  *  30 : Minimum for TB6560 stepper drivers
  */
-#define MINIMUM_STEPPER_PULSE 2
+ #define MINIMUM_STEPPER_PULSE 0
+//JJJ #define MINIMUM_STEPPER_PULSE 2
 
 /**
  * Maximum stepping rate (in Hz) the stepper driver allows
@@ -864,7 +867,8 @@
  *  130000 : Maximum for LV8729 stepper driver
  *   15000 : Maximum for TB6560 stepper driver
  */
-#define MAXIMUM_STEPPER_RATE 250000
+ #define MAXIMUM_STEPPER_RATE 400000
+//JJJ  #define MAXIMUM_STEPPER_RATE 250000
 
 // @section temperature
 
@@ -926,7 +930,7 @@
 // enter the serial receive buffer, so they cannot be blocked.
 // Currently handles M108, M112, M410
 // Does not work on boards using AT90USB (USBCON) processors!
-//#define EMERGENCY_PARSER
+#define EMERGENCY_PARSER
 
 // Bad Serial-connections can miss a received command by sending an 'ok'
 // Therefore some clients abort after 30 seconds in a timeout.
@@ -935,7 +939,7 @@
 //#define NO_TIMEOUTS 1000 // Milliseconds
 
 // Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
-//#define ADVANCED_OK
+#define ADVANCED_OK
 
 // @section extras
 
@@ -987,12 +991,12 @@
  * Requires NOZZLE_PARK_FEATURE.
  * This feature is required for the default FILAMENT_RUNOUT_SCRIPT.
  */
-//#define ADVANCED_PAUSE_FEATURE
+#define ADVANCED_PAUSE_FEATURE
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
   #define PAUSE_PARK_RETRACT_FEEDRATE         60  // (mm/s) Initial retract feedrate.
   #define PAUSE_PARK_RETRACT_LENGTH            2  // (mm) Initial retract.
                                                   // This short retract is done immediately, before parking the nozzle.
-  #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     10  // (mm/s) Unload filament feedrate. This can be pretty fast.
+  #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     30  // (mm/s) Unload filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_UNLOAD_ACCEL        25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
   #define FILAMENT_CHANGE_UNLOAD_LENGTH      100  // (mm) The length of filament for a complete unload.
                                                   //   For Bowden, the full length of the tube and nozzle.
@@ -1022,10 +1026,10 @@
   #define FILAMENT_CHANGE_ALERT_BEEPS         10  // Number of alert beeps to play when a response is needed.
   #define PAUSE_PARK_NO_STEPPER_TIMEOUT           // Enable for XYZ steppers to stay powered on during filament change.
 
-  //#define PARK_HEAD_ON_PAUSE                    // Park the nozzle during pause and filament change.
-  //#define HOME_BEFORE_FILAMENT_CHANGE           // Ensure homing has been completed prior to parking for filament change
+  #define PARK_HEAD_ON_PAUSE                    // Park the nozzle during pause and filament change.
+  #define HOME_BEFORE_FILAMENT_CHANGE           // Ensure homing has been completed prior to parking for filament change
 
-  //#define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
+  #define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
   //#define FILAMENT_UNLOAD_ALL_EXTRUDERS         // Allow M702 to unload all extruders above a minimum target temp (as set by M302)
 #endif
 
@@ -1496,7 +1500,7 @@
 /**
  * M43 - display pin status, watch pins for changes, watch endstops & toggle LED, Z servo probe test, toggle pins
  */
-//#define PINS_DEBUGGING
+#define PINS_DEBUGGING
 
 /**
  * Auto-report temperatures with M155 S<seconds>
