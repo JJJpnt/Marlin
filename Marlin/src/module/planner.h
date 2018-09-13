@@ -101,7 +101,9 @@ typedef struct {
   };
   uint32_t step_event_count;                // The number of step events required to complete this block
 
-  uint8_t active_extruder;                  // The extruder to move (if E move)
+  #if EXTRUDERS > 1
+    uint8_t active_extruder;                // The extruder to move (if E move)
+  #endif
 
   #if ENABLED(MIXING_EXTRUDER)
     uint32_t mix_steps[MIXING_STEPPERS];    // Scaled steps[E_AXIS] for the mixing steppers
@@ -231,7 +233,7 @@ class Planner {
     #endif
 
     #if ENABLED(LIN_ADVANCE)
-      static float extruder_advance_K;
+      static float extruder_advance_K[EXTRUDERS];
     #endif
 
     #if HAS_POSITION_FLOAT
@@ -361,7 +363,7 @@ class Planner {
        *  Returns 1.0 if planner.z_fade_height is 0.0.
        *  Returns 0.0 if Z is past the specified 'Fade Height'.
        */
-      inline static float fade_scaling_factor_for_z(const float &rz) {
+      static inline float fade_scaling_factor_for_z(const float &rz) {
         static float z_fade_factor = 1;
         if (z_fade_height) {
           if (rz >= z_fade_height) return 0;

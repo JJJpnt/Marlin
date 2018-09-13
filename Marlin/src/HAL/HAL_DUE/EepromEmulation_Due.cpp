@@ -31,7 +31,7 @@
 
 #ifdef ARDUINO_ARCH_SAM
 
-#include "../persistent_store_api.h"
+#include "../shared/persistent_store_api.h"
 #include "../../inc/MarlinConfig.h"
 
 #if ENABLED(EEPROM_SETTINGS) && DISABLED(I2C_EEPROM) && DISABLED(SPI_EEPROM)
@@ -310,9 +310,9 @@ static bool ee_PageErase(uint16_t page) {
 
   #ifdef EE_EMU_DEBUG
     SERIAL_ECHO_START();
-    SERIAL_ECHOLNPAIR("EEPROM PageErase  ",page);
-    SERIAL_ECHOLNPAIR(" in FLASH address ",(uint32_t)addrflash);
-    SERIAL_ECHOLNPAIR(" base address     ",(uint32_t)getFlashStorage(0));
+    SERIAL_ECHOLNPAIR("EEPROM PageErase  ", page);
+    SERIAL_ECHOLNPAIR(" in FLASH address ", (uint32_t)addrflash);
+    SERIAL_ECHOLNPAIR(" base address     ", (uint32_t)getFlashStorage(0));
     SERIAL_FLUSH();
   #endif
 
