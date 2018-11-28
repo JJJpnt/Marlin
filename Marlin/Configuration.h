@@ -125,10 +125,11 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 115200
+ //#define BAUDRATE 115200
+ #define BAUDRATE 250000
 
 // Enable the Bluetooth serial interface on AT90USB devices
-#define BLUETOOTH
+//#define BLUETOOTH
 
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
@@ -400,9 +401,14 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Ultimaker
-  #define DEFAULT_Kp 26.19
-  #define DEFAULT_Ki 1.95
-  #define DEFAULT_Kd 88.09
+  //#define DEFAULT_Kp 26.19
+  //#define DEFAULT_Ki 1.95
+  //#define DEFAULT_Kd 88.09
+
+  //JJJ Kossel
+  #define DEFAULT_Kp 25.92
+  #define DEFAULT_Ki 1.90
+  #define DEFAULT_Kd 88.19
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -525,6 +531,14 @@
 #define DELTA
 
 #if ENABLED(DELTA)
+
+//Recv: Iteration : 02                                std dev:0.018
+//Recv: .Height:278.07  Ex:-0.51  Ey:-0.46  Ez:+0.00  Radius:130.48
+//Recv: .               Tx:+0.20  Ty:-0.11  Tz:-0.09
+//Recv: Calibration OK                                rolling back.
+//Recv: .Height:278.06  Ex:-0.54  Ey:-0.45  Ez:+0.00  Radius:130.55
+//Recv: .               Tx:+0.16  Ty:-0.12  Tz:-0.04
+//Recv: Save with M500 and/or copy to Configuration.h
 
   // Make delta curves from many straight lines (linear interpolation).
   // This is a trade-off between visible corners (not enough segments)
@@ -775,7 +789,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1191,7 +1205,7 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
 //  #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define MESH_INSET 20              // Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 40 //20              // Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
@@ -1559,7 +1573,7 @@
  * you must uncomment the following option or it won't work.
  *
  */
-#define SDSUPPORT
+//#define SDSUPPORT
 
 /**
  * SD CARD: SPI SPEED
@@ -1795,7 +1809,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // ReprapWorld Graphical LCD
@@ -1953,7 +1967,7 @@
 // Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
 // is too low, you should also increment SOFT_PWM_SCALE.
-//#define FAN_SOFT_PWM
+#define FAN_SOFT_PWM
 
 // Incrementing this by 1 will double the software PWM frequency,
 // affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
