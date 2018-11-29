@@ -484,7 +484,7 @@
  */
 #define PREVENT_LENGTHY_EXTRUDE
 //#define EXTRUDE_MAXLENGTH 200
-#define EXTRUDE_MAXLENGTH 500 //JJJ (for M600 unload)
+#define EXTRUDE_MAXLENGTH 700 //JJJ (for M600 unload)
 
 
 //===========================================================================
@@ -574,14 +574,14 @@
  *          TMC5130, TMC5130_STANDALONE
  * :['A4988', 'DRV8825', 'LV8729', 'L6470', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2208 //JJJ
-#define Y_DRIVER_TYPE  TMC2208 //JJJ
-#define Z_DRIVER_TYPE  TMC2208 //JJJ
+//#define X_DRIVER_TYPE  TMC2208 //JJJ
+//#define Y_DRIVER_TYPE  TMC2208 //JJJ
+//#define Z_DRIVER_TYPE  TMC2208 //JJJ
 //#define X2_DRIVER_TYPE TMC2208 //JJJ
 //#define Y2_DRIVER_TYPE TMC2208 //JJJ
 //#define Z2_DRIVER_TYPE TMC2208 //JJJ
-#define E0_DRIVER_TYPE TMC2208 //JJJ
-#define E1_DRIVER_TYPE TMC2208 //JJJ
+//#define E0_DRIVER_TYPE TMC2208 //JJJ
+//#define E1_DRIVER_TYPE TMC2208 //JJJ
 //#define E2_DRIVER_TYPE TMC2208 //JJJ
 //#define E3_DRIVER_TYPE TMC2208 //JJJ
 //#define E4_DRIVER_TYPE TMC2208 //JJJ
@@ -1027,7 +1027,7 @@
  * Normally G28 leaves leveling disabled on completion. Enable
  * this option to have G28 restore the prior leveling state.
  */
-//#define RESTORE_LEVELING_AFTER_G28
+#define RESTORE_LEVELING_AFTER_G28 //JJJ (needed for UBL)
 
 /**
  * Enable detailed logging of G28, G29, M48, etc.
@@ -1145,7 +1145,7 @@
   //#define PROBE_PT_3_Y 20
   //JJJ :
   #define PROBE_PT_1_X 25
-  #define PROBE_PT_1_Y (Y_BED_SIZE-55)
+  #define PROBE_PT_1_Y (Y_BED_SIZE+Y_PROBE_OFFSET_FROM_EXTRUDER-10)
   #define PROBE_PT_2_X 25
   #define PROBE_PT_2_Y 20
   #define PROBE_PT_3_X (X_BED_SIZE-25)
@@ -1336,7 +1336,7 @@
  *    P1  Raise the nozzle always to Z-park height.
  *    P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
  */
-//#define NOZZLE_PARK_FEATURE
+#define NOZZLE_PARK_FEATURE //JJJ
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z }
