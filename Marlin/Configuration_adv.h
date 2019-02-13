@@ -458,7 +458,7 @@
 //
 // Use Junction Deviation instead of traditional Jerk Limiting
 //
-//#define JUNCTION_DEVIATION
+#define JUNCTION_DEVIATION    //JJJ
 #if ENABLED(JUNCTION_DEVIATION)
   #define JUNCTION_DEVIATION_MM 0.02  // (mm) Distance from real junction edge
 #endif
@@ -863,7 +863,9 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MINIMUM_STEPPER_DIR_DELAY 650
+ //#define MINIMUM_STEPPER_DIR_DELAY 650
+ #define MINIMUM_STEPPER_DIR_DELAY 100 //JJJ
+// #define MINIMUM_STEPPER_DIR_DELAY 20 //JJJ
 //JJJ set to 20 before
 
 /**
@@ -876,7 +878,9 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MINIMUM_STEPPER_PULSE 2
+// #define MINIMUM_STEPPER_PULSE 0 //JJJ
+ #define MINIMUM_STEPPER_PULSE 1 //JJJ
+ //#define MINIMUM_STEPPER_PULSE 2
 //JJJ set to 0 before
 
 /**
@@ -891,8 +895,9 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MAXIMUM_STEPPER_RATE 250000
-//JJJ before set to 400000
+ //#define MAXIMUM_STEPPER_RATE 250000
+#define MAXIMUM_STEPPER_RATE 250000  //JJJ
+//JJJ before set to          400000
 
 // @section temperature
 
@@ -1144,13 +1149,13 @@
   #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
   #define X_CURRENT          800  // rms current in mA. Multiply by 1.41 for peak current.
-  #define X_MICROSTEPS        16  // 0..256
+  #define X_MICROSTEPS        32  // 0..256
 
   #define Y_CURRENT          800
-  #define Y_MICROSTEPS        16
+  #define Y_MICROSTEPS        32
 
   #define Z_CURRENT          800
-  #define Z_MICROSTEPS        16
+  #define Z_MICROSTEPS        32
 
   #define X2_CURRENT         800
   #define X2_MICROSTEPS       16
@@ -1162,7 +1167,7 @@
   #define Z2_MICROSTEPS       16
 
   #define E0_CURRENT         800
-  #define E0_MICROSTEPS       16
+  #define E0_MICROSTEPS       32
 
   #define E1_CURRENT         800
   #define E1_MICROSTEPS       16
@@ -1190,7 +1195,7 @@
    * Use Trinamic's ultra quiet stepping mode.
    * When disabled, Marlin will use spreadCycle stepping mode.
    */
-  #define STEALTHCHOP
+  //#define STEALTHCHOP
 
   /**
    * Monitor Trinamic TMC2130 and TMC2208 drivers for error conditions,
@@ -1203,7 +1208,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 S0/1 - Report driver parameters (Requires TMC_DEBUG)
    */
-  //#define MONITOR_DRIVER_STATUS
+  #define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -1255,7 +1260,7 @@
    * Enable M122 debugging command for TMC stepper drivers.
    * M122 S0/1 will enable continous reporting.
    */
-  //#define TMC_DEBUG
+  #define TMC_DEBUG
 
   /**
    * M915 Z Axis Calibration

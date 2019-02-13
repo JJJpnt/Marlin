@@ -125,8 +125,8 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
- //#define BAUDRATE 115200
- #define BAUDRATE 250000
+ #define BAUDRATE 115200
+ //#define BAUDRATE 250000
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -544,7 +544,8 @@
   // This is a trade-off between visible corners (not enough segments)
   // and processor overload (too many expensive sqrt calls).
 //  #define DELTA_SEGMENTS_PER_SECOND 160
-  #define DELTA_SEGMENTS_PER_SECOND 400
+//  #define DELTA_SEGMENTS_PER_SECOND 400 //WTF JJJ SERIOUSLY (anycubic exemple : 80)
+  #define DELTA_SEGMENTS_PER_SECOND 100 //JJJ
 
   // Convert feedrates to apply to the Effector instead of the Carriages
   #define DELTA_FEEDRATE_SCALING
@@ -671,13 +672,13 @@
  *          TMC5130, TMC5130_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE']
  */
-//#define X_DRIVER_TYPE  A4988
-//#define Y_DRIVER_TYPE  A4988
-//#define Z_DRIVER_TYPE  A4988
+#define X_DRIVER_TYPE  TMC2130
+#define Y_DRIVER_TYPE  TMC2130
+#define Z_DRIVER_TYPE  TMC2130
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
-//#define E0_DRIVER_TYPE A4988
+#define E0_DRIVER_TYPE TMC2130
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -876,7 +877,8 @@
   //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
 #endif
 #define PROBING_FANS_OFF          // Turn fans off when probing
-#define DELAY_BEFORE_PROBING 500  // (ms) To prevent vibrations from triggering piezo sensors
+//#define DELAY_BEFORE_PROBING 500  // (ms) To prevent vibrations from triggering piezo sensors
+#define DELAY_BEFORE_PROBING 50  // (ms) To prevent vibrations from triggering piezo sensors
 
 // A probe that is deployed and stowed with a solenoid pin (SOL1_PIN)
 //#define SOLENOID_PROBE
@@ -915,11 +917,13 @@
 #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
 // Certain types of probes need to stay away from edges
-#define MIN_PROBE_EDGE 15
+//#define MIN_PROBE_EDGE 15
+#define MIN_PROBE_EDGE 30 //JJJ
 
 // X and Y axis travel speed (mm/m) between probes
 //#define XY_PROBE_SPEED (20*60)
-#define XY_PROBE_SPEED (30*60)
+//#define XY_PROBE_SPEED (30*60) //last JJJ
+#define XY_PROBE_SPEED (80*60) //JJJ
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 //#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
@@ -949,17 +953,17 @@
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
 // #define Z_CLEARANCE_DEPLOY_PROBE   16 // Z Clearance for Deploy/Stow
- #define Z_CLEARANCE_DEPLOY_PROBE   5 // Z Clearance for Deploy/Stow
+ #define Z_CLEARANCE_DEPLOY_PROBE   4 // Z Clearance for Deploy/Stow
                             //PrecisionPiezo
                             //JJJ default 10
 //#define Z_CLEARANCE_BETWEEN_PROBES  11 // Z Clearance between probe points
-#define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
+#define Z_CLEARANCE_BETWEEN_PROBES  4 // Z Clearance between probe points
                             //PrecisionPiezo
                             //JJJ default 5
 //#define Z_CLEARANCE_MULTI_PROBE     11 // Z Clearance between multiple probes
-#define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
+#define Z_CLEARANCE_MULTI_PROBE     3 // Z Clearance between multiple probes
 //PrecisionPiezo
-#define Z_AFTER_PROBING           5 // Z position after probing is done
+#define Z_AFTER_PROBING           10 // Z position after probing is done
 
 #define Z_PROBE_LOW_POINT          -3 // Farthest distance below the trigger-point to go before stopping
 
@@ -1205,8 +1209,9 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
 //  #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define MESH_INSET 40 //20              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
+  #define MESH_INSET 55 //20              // Set Mesh bounds as an inset region of the bed
+//  #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_X 6 //JJJ      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle

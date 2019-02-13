@@ -422,3 +422,14 @@
  *  65
  *  66
  */
+
+ //JJJ
+// #define X_CS_PIN         P0_15
+// #define Y_CS_PIN         P0_16
+// #define Z_CS_PIN         P1_23
+// #define E0_CS_PIN        P2_11
+
+ #define X_CS_PIN         P0_16
+ #define Y_CS_PIN         P1_23
+ #define Z_CS_PIN         P2_11
+ #define E0_CS_PIN        P1_31
