@@ -158,6 +158,7 @@
 
 #define BOARD_FYSETC_F6_13      541
 
-#define MB(board) (defined(BOARD_##board) && MOTHERBOARD==BOARD_##board)
+//#define MB(board) (defined(BOARD_##board) && MOTHERBOARD==BOARD_##board)
+#define MB(board) (MOTHERBOARD==BOARD_##board)
 
 #endif // __BOARDS_H

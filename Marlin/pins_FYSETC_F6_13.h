@@ -61,6 +61,9 @@
 #define X_STEP_PIN         54
 #define X_DIR_PIN          55
 #define X_ENABLE_PIN       38
+//#define X_STEP_PIN         36
+//#define X_DIR_PIN          34
+//#define X_ENABLE_PIN       30
 
 #define Y_STEP_PIN         60
 #define Y_DIR_PIN          61
@@ -77,6 +80,9 @@
 #define E1_STEP_PIN        36
 #define E1_DIR_PIN         34
 #define E1_ENABLE_PIN      30
+//#define E1_STEP_PIN        54
+//#define E1_DIR_PIN         55
+//#define E1_ENABLE_PIN      38
 
 #define E2_STEP_PIN        59
 #define E2_DIR_PIN         57
@@ -87,12 +93,14 @@
  * DIAG is not directly connected to the MCU. Please close
  * the jumper next to the limit switch socket when using it.
  */
-#define X_CS_PIN        70
+ #define X_CS_PIN        70
+// #define X_CS_PIN        32
 #define Y_CS_PIN        39
 #define Z_CS_PIN        74
 
 #define E0_CS_PIN       47
 #define E1_CS_PIN       32
+//#define E1_CS_PIN       70
 #define E2_CS_PIN       42
 
 #define X_TMC2130_DIAG     -1
@@ -146,7 +154,7 @@
 #define HEATER_2_PIN       7
 #define HEATER_BED_PIN     8
 
-#define FAN0_PIN           44
+#define FAN_PIN           44
 #define FAN1_PIN           45
 #define FAN2_PIN           46
 
@@ -179,8 +187,7 @@
 //#if ENABLED(CASE_LIGHT_ENABLE) && !PIN_EXISTS(CASE_LIGHT) && !defined(SPINDLE_LASER_ENABLE_PIN)
 //  #if !defined(NUM_SERVOS) || NUM_SERVOS == 0 // try to use servo connector first
 //    #define CASE_LIGHT_PIN   6      // MUST BE HARDWARE PWM
-//  #elif !(ENABLED(ULTRA_LCD) && ENABLED(NEWPANEL) \
-//      && (ENABLED(PANEL_ONE) || ENABLED(VIKI2) || ENABLED(miniVIKI) || ENABLED(MINIPANEL) || ENABLED(REPRAPWORLD_KEYPAD)))  // try to use AUX 2
+//  #elif !(ENABLED(ULTRA_LCD) && ENABLED(NEWPANEL) && (ENABLED(PANEL_ONE) || ENABLED(VIKI2) || ENABLED(miniVIKI) || ENABLED(MINIPANEL) || ENABLED(REPRAPWORLD_KEYPAD)))  // try to use AUX 2
 //    #define CASE_LIGHT_PIN   44     // MUST BE HARDWARE PWM
 //  #endif
 //#endif
@@ -193,8 +200,7 @@
 //    #define SPINDLE_LASER_ENABLE_PIN  4  // Pin should have a pullup/pulldown!
 //    #define SPINDLE_LASER_PWM_PIN     6  // MUST BE HARDWARE PWM
 //    #define SPINDLE_DIR_PIN           5
-//  #elif !(ENABLED(ULTRA_LCD) && ENABLED(NEWPANEL) \
-//      && (ENABLED(PANEL_ONE) || ENABLED(VIKI2) || ENABLED(miniVIKI) || ENABLED(MINIPANEL) || ENABLED(REPRAPWORLD_KEYPAD)))  // try to use AUX 2
+//  #elif !(ENABLED(ULTRA_LCD) && ENABLED(NEWPANEL) && (ENABLED(PANEL_ONE) || ENABLED(VIKI2) || ENABLED(miniVIKI) || ENABLED(MINIPANEL) || ENABLED(REPRAPWORLD_KEYPAD)))  // try to use AUX 2
 //    #define SPINDLE_LASER_ENABLE_PIN 40  // Pin should have a pullup/pulldown!
 //    #define SPINDLE_LASER_PWM_PIN    44  // MUST BE HARDWARE PWM
 //    #define SPINDLE_DIR_PIN          65
