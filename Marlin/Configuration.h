@@ -685,7 +685,7 @@
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
-//#define ENDSTOP_INTERRUPTS_FEATURE
+#define ENDSTOP_INTERRUPTS_FEATURE
 
 /**
  * Endstop Noise Filter
@@ -1175,7 +1175,7 @@
 #else
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_BILINEAR
-#define AUTO_BED_LEVELING_UBL
+//#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 #endif
 /**
@@ -1258,8 +1258,8 @@
 
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-  #define MESH_INSET 15 //JJJ def:1              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 6 //JJJ def:10      // Don't use more than 15 points per axis, implementation limited.
+  #define MESH_INSET 10 //JJJ def:1              // Set Mesh bounds as an inset region of the bed
+  #define GRID_MAX_POINTS_X 15 //JJJ def:10      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
