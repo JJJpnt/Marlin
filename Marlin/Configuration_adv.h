@@ -137,7 +137,8 @@
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ENABLED(THERMAL_PROTECTION_HOTENDS)
-  #define THERMAL_PROTECTION_PERIOD 40        // Seconds
+  //#define THERMAL_PROTECTION_PERIOD 40        // Seconds
+  #define THERMAL_PROTECTION_PERIOD 16        // Seconds
   #define THERMAL_PROTECTION_HYSTERESIS 4     // Degrees Celsius
 
   //#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
@@ -521,7 +522,7 @@
 #define Z_HOME_BUMP_MM 2
 #define HOMING_BUMP_DIVISOR { 2, 2, 4 }  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 //#define QUICK_HOME                     // If homing includes X and Y, do a diagonal move initially
-//#define HOMING_BACKOFF_MM { 2, 2, 2 }  // (mm) Move away from the endstops after homing
+#define HOMING_BACKOFF_MM { 2, 2, 20 }  // (mm) Move away from the endstops after homing
 
 // When G28 is called, this option will make Y home before X
 //#define HOME_Y_BEFORE_X
@@ -849,8 +850,10 @@
 // Change values more rapidly when the encoder is rotated faster
 #define ENCODER_RATE_MULTIPLIER
 #if ENABLED(ENCODER_RATE_MULTIPLIER)
-  #define ENCODER_10X_STEPS_PER_SEC   30  // (steps/s) Encoder rate for 10x speed
-  #define ENCODER_100X_STEPS_PER_SEC  80  // (steps/s) Encoder rate for 100x speed
+  #define ENCODER_10X_STEPS_PER_SEC   70  // (steps/s) Encoder rate for 10x speed
+  #define ENCODER_100X_STEPS_PER_SEC  120  // (steps/s) Encoder rate for 100x speed
+  //#define ENCODER_10X_STEPS_PER_SEC   30  // (steps/s) Encoder rate for 10x speed
+  //#define ENCODER_100X_STEPS_PER_SEC  80  // (steps/s) Encoder rate for 100x speed
 #endif
 
 // Play a beep when the feedrate is changed from the Status Screen
@@ -869,7 +872,7 @@
   #endif
 
   // BACK menu items keep the highlight at the top
-  //#define TURBO_BACK_MENU_ITEM
+  #define TURBO_BACK_MENU_ITEM
 
   /**
    * LED Control Menu
@@ -891,7 +894,7 @@
 #endif // HAS_LCD_MENU
 
 // Scroll a longer status message into view
-//#define STATUS_MESSAGE_SCROLLING
+#define STATUS_MESSAGE_SCROLLING
 
 // On the Info Screen, display XY with one decimal place when possible
 //#define LCD_DECIMAL_SMALL_XY
@@ -900,15 +903,15 @@
 //#define LCD_TIMEOUT_TO_STATUS 15000
 
 // Add an 'M73' G-code to set the current percentage
-//#define LCD_SET_PROGRESS_MANUALLY
+#define LCD_SET_PROGRESS_MANUALLY
 
 // Show the E position (filament used) during printing
 //#define LCD_SHOW_E_TOTAL
 
 #if HAS_GRAPHICAL_LCD && HAS_PRINT_PROGRESS
   //#define PRINT_PROGRESS_SHOW_DECIMALS // Show progress with decimal digits
-  //#define SHOW_REMAINING_TIME          // Display estimated time to completion
-  //#define ROTATE_PROGRESS_DISPLAY      // Display (P)rogress, (E)lapsed, and (R)emaining time
+  #define SHOW_REMAINING_TIME          // Display estimated time to completion
+  #define ROTATE_PROGRESS_DISPLAY      // Display (P)rogress, (E)lapsed, and (R)emaining time
 #endif
 
 #if HAS_CHARACTER_LCD && HAS_PRINT_PROGRESS
@@ -952,7 +955,7 @@
    * an option on the LCD screen to continue the print from the last-known
    * point in the file.
    */
-  //#define POWER_LOSS_RECOVERY
+  #define POWER_LOSS_RECOVERY
   #if ENABLED(POWER_LOSS_RECOVERY)
     //#define POWER_LOSS_PIN         44 // Pin to detect power loss
     //#define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
@@ -1004,10 +1007,10 @@
   #endif
 
   // This allows hosts to request long names for files and folders with M33
-  //#define LONG_FILENAME_HOST_SUPPORT
+  #define LONG_FILENAME_HOST_SUPPORT
 
   // Enable this option to scroll long filenames in the SD card menu
-  //#define SCROLL_LONG_FILENAMES
+  #define SCROLL_LONG_FILENAMES
 
   // Leave the heaters on after Stop Print (not recommended!)
   //#define SD_ABORT_NO_COOLDOWN
@@ -1024,7 +1027,7 @@
    * On print completion the LCD Menu will open with the file selected.
    * You can just click to start the print, or navigate elsewhere.
    */
-  //#define SD_REPRINT_LAST_SELECTED_FILE
+  #define SD_REPRINT_LAST_SELECTED_FILE
 
   /**
    * Auto-report SdCard status with M27 S<seconds>
@@ -1305,14 +1308,14 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define BABYSTEP_WITHOUT_HOMING
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
   #define BABYSTEP_INVERT_Z false           // Change if Z babysteps should go the other way
-  #define BABYSTEP_MULTIPLICATOR_Z  1       // Babysteps are very small. Increase for faster motion.
+  #define BABYSTEP_MULTIPLICATOR_Z  5       // Babysteps are very small. Increase for faster motion.
   #define BABYSTEP_MULTIPLICATOR_XY 1
-  //#define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
+  #define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
@@ -1323,7 +1326,7 @@
     #endif
   #endif
 
-  //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
+  #define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
   //#define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
@@ -1350,10 +1353,11 @@
  * See http://marlinfw.org/docs/features/lin_advance.html for full instructions.
  * Mention @Sebastianv650 on GitHub to alert the author of any issues.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
-  #define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed
+  //#define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed
+  #define LIN_ADVANCE_K 0    // Unit: mm compression per 1mm/s extruder speed
   //#define LA_DEBUG            // If enabled, this will generate debug information output over USB.
 #endif
 
@@ -2554,7 +2558,7 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-//#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
   //#define HOST_PROMPT_SUPPORT
 #endif
