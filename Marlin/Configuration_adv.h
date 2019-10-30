@@ -864,7 +864,7 @@
  * Override the default value based on the driver type set in Configuration.h.
  */
  //#define MINIMUM_STEPPER_DIR_DELAY 650
- #define MINIMUM_STEPPER_DIR_DELAY 100 //JJJ
+ #define MINIMUM_STEPPER_DIR_DELAY 50 //JJJ
 // #define MINIMUM_STEPPER_DIR_DELAY 20 //JJJ
 //JJJ set to 20 before
 
@@ -896,7 +896,7 @@
  * Override the default value based on the driver type set in Configuration.h.
  */
  //#define MAXIMUM_STEPPER_RATE 250000
-#define MAXIMUM_STEPPER_RATE 250000  //JJJ
+#define MAXIMUM_STEPPER_RATE 300000  //JJJ
 //JJJ before set to          400000
 
 // @section temperature

@@ -429,7 +429,10 @@
 // #define Z_CS_PIN         P1_23
 // #define E0_CS_PIN        P2_11
 
- #define X_CS_PIN         P0_16
- #define Y_CS_PIN         P1_23
- #define Z_CS_PIN         P2_11
- #define E0_CS_PIN        P1_31
+ //#define X_CS_PIN         P0_16
+ //#define Y_CS_PIN         P1_23
+ //#define Z_CS_PIN         P2_11
+ //#define E0_CS_PIN        P1_31
+
+  #define HEATER_0_PIN     RAMPS_D8_PIN //JJJ use bed ramps pin for hotend
+  #define FAN_PIN        RAMPS_D9_PIN
